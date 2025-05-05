@@ -18,7 +18,7 @@ const corsOptions = {
   origin: [
     'http://localhost:8000',      // Локальный фронтенд
     'http://localhost:3000',      // Локальный бэкенд (если нужно)
-    'https://ваш-домен.onrender.com' // Продакшен URL
+    'https://nodevue.onrender.com' // Продакшен URL
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
