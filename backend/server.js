@@ -14,11 +14,6 @@ const app = express();
 // Сборка Vue.js проекта перед запуском сервера
 console.log('Skipping automatic Vue.js build');
 
-// Вызываем сборку только в production, в development можно запускать отдельно
-if (process.env.NODE_ENV === 'production') {
-    buildVueProject();
-}
-
 // Настройка CORS - только для API в development
 if (process.env.NODE_ENV !== 'production') {
     app.use(cors({ origin: 'http://localhost:8000' }));
