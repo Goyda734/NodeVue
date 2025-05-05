@@ -1,22 +1,21 @@
 import { defineConfig } from 'vite'
-import { fileURLToPath, URL } from 'url'
 import vue from '@vitejs/plugin-vue'
+import path from 'path'
 
 export default defineConfig({
   plugins: [vue()],
-  base: '/', // Важно для корректных путей
+  base: '/',
   build: {
-    outDir: '../backend/public',
+    outDir: path.resolve(__dirname, '../backend/public'),
     emptyOutDir: true,
+    assetsDir: 'assets',
     rollupOptions: {
-      input: {
-        main: fileURLToPath(new URL('./index.html', import.meta.url))
-      }
+      input: path.resolve(__dirname, 'index.html')
     }
   },
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': path.resolve(__dirname, './src')
     }
   }
 })
