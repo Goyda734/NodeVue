@@ -14,10 +14,22 @@ const app = express();
 // Сборка Vue.js проекта перед запуском сервера
 console.log('Skipping automatic Vue.js build');
 
-// Настройка CORS - только для API в development
-if (process.env.NODE_ENV !== 'production') {
-    app.use(cors({ origin: 'http://localhost:8000' }));
-}
+const corsOptions = {
+  origin: [
+    'http://localhost:8000',      // Локальный фронтенд
+    'http://localhost:3000',      // Локальный бэкенд (если нужно)
+    'https://ваш-домен.onrender.com' // Продакшен URL
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+};
+
+// Применяем CORS ко всем роутам
+app.use(cors(corsOptions));
+
+// Обработка preflight-запросов
+app.options('*', cors(corsOptions));
 
 app.use(express.json());
 
@@ -252,9 +264,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get(/^(?!\/api).*/, (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
   });
-app.listen(process.env.PORT, () => {
-    console.log(`Server running on port: http://localhost:${process.env.PORT}`);
-});
 
 // Обработка ошибок
 app.use((err, req, res, next) => {
