@@ -261,9 +261,11 @@ app.use('/uploads', express.static(path.join(__dirname, 'Uploads')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Обработка всех остальных запросов для Vue Router
-app.get(/^(?!\/api).*/, (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-  });
+app.get('*', (req, res, next) => {
+  console.log('Request path:', req.path);
+  if (req.path.startsWith('/api')) return next();
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 // Обработка ошибок
 app.use((err, req, res, next) => {
