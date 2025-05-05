@@ -12,18 +12,7 @@ dotenv.config();
 const app = express();
 
 // Сборка Vue.js проекта перед запуском сервера
-function buildVueProject() {
-  try {
-    console.log('Building Vue.js project...');
-    process.chdir('../frontend'); // Переходим в папку frontend
-    execSync('npm install && npm run build', { stdio: 'inherit' });
-    process.chdir('../backend'); // Возвращаемся обратно
-    console.log('Vue.js project built successfully');
-  } catch (error) {
-    console.error('Failed to build Vue.js project:', error);
-    process.exit(1);
-  }
-}
+console.log('Skipping automatic Vue.js build');
 
 // Вызываем сборку только в production, в development можно запускать отдельно
 if (process.env.NODE_ENV === 'production') {
