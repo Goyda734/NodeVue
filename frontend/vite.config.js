@@ -10,9 +10,12 @@ export default defineConfig({
     strictPort: true, // Не искать другие порты, если 8000 занят
   },
   build: {
-    outDir: '../backend/public', // Куда собирать фронтенд
-    emptyOutDir: true
-  }
+    outDir: path.resolve(__dirname, '../backend/public'),
+    emptyOutDir: true,
+    assetsDir: 'assets', // Явно указываем папку для ассетов
+    rollupOptions: {
+      input: path.resolve(__dirname, 'index.html') // Можно упростить
+    }
   },
   resolve: {
     alias: {
