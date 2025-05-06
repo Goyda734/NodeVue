@@ -19,7 +19,7 @@ export default createStore({
     actions: {
         async register({ commit }, { email, password }) {
             try {
-                await axios.post('http://localhost:3000/api/register', { email, password });
+                await axios.post('/api/register', { email, password });
                 return { success: true };
             } catch (error) {
                 console.error('Registration failed:', error.response?.data?.error || error.message);
@@ -31,7 +31,7 @@ export default createStore({
         },
         async login({ commit }, { email, password }) {
             try {
-                const response = await axios.post('http://localhost:3000/api/login', { email, password });
+                const response = await axios.post('/api/login', { email, password });
                 const { token, role } = response.data;
                 localStorage.setItem('token', token);
                 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
