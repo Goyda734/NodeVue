@@ -226,7 +226,7 @@ export default {
 
         const fetchTeachers = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/api/teachers?page=${currentPage.value}&limit=${limit}`);
+                const response = await axios.get(`/api/teachers?page=${currentPage.value}&limit=${limit}`);
                 teachers.value = response.data.teachers;
                 total.value = response.data.total;
             } catch (error) {
@@ -249,9 +249,9 @@ export default {
 
             try {
                 if (form.value.id) {
-                    await axios.put(`http://localhost:3000/api/teachers/${form.value.id}`, formData);
+                    await axios.put(`/api/teachers/${form.value.id}`, formData);
                 } else {
-                    await axios.post(`http://localhost:3000/api/teachers`, formData);
+                    await axios.post(`/api/teachers`, formData);
                 }
                 fetchTeachers();
                 resetForm();
@@ -269,7 +269,7 @@ export default {
         const deleteTeacher = async (id) => {
             if (confirm('Удалить преподавателя?')) {
                 try {
-                    await axios.delete(`http://localhost:3000/api/teachers/${id}`);
+                    await axios.delete(`/api/teachers/${id}`);
                     fetchTeachers();
                 } catch (error) {
                     console.error('Failed to delete teacher:', error);
@@ -304,7 +304,7 @@ export default {
         };
 
         const getImageUrl = (image) => {
-            return image ? `http://localhost:3000${image}` : '/images/placeholder.jpg';
+            return image ? `${image}` : '/images/placeholder.jpg';
         };
 
         const formatDate = (dateString) => {
