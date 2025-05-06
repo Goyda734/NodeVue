@@ -226,7 +226,7 @@ export default {
 
         const fetchStudents = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/api/students?page=${currentPage.value}&limit=${limit}`);
+                const response = await axios.get(`/api/students?page=${currentPage.value}&limit=${limit}`);
                 students.value = response.data.students;
                 total.value = response.data.total;
             } catch (error) {
@@ -249,9 +249,9 @@ export default {
 
             try {
                 if (form.value.id) {
-                    await axios.put(`http://localhost:3000/api/students/${form.value.id}`, formData);
+                    await axios.put(`/api/students/${form.value.id}`, formData);
                 } else {
-                    await axios.post(`http://localhost:3000/api/students`, formData);
+                    await axios.post(`/api/students`, formData);
                 }
                 fetchStudents();
                 resetForm();
@@ -269,7 +269,7 @@ export default {
         const deleteStudent = async (id) => {
             if (confirm('Удалить студента?')) {
                 try {
-                    await axios.delete(`http://localhost:3000/api/students/${id}`);
+                    await axios.delete(`/api/students/${id}`);
                     fetchStudents();
                 } catch (error) {
                     console.error('Failed to delete student:', error);
@@ -304,7 +304,7 @@ export default {
         };
 
         const getImageUrl = (image) => {
-            return image ? `http://localhost:3000${image}` : '/images/placeholder.jpg';
+            return image ? `${image}` : '/images/placeholder.jpg';
         };
 
         const formatDate = (dateString) => {
